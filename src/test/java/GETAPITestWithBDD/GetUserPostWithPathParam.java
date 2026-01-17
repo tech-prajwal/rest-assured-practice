@@ -23,7 +23,21 @@ public class GetUserPostWithPathParam {
 		};
 	}
 	
-	
+	/*
+	 * TECHNICAL NOTE: Data Driven Testing & Path Injection
+	 * ----------------------------------------------------
+	 * 1. @DataProvider ("getUserData"):
+	 * - Returns a 2D Object array. Each "row" in the array triggers a separate 
+	 * execution of this test method.
+	 * - The array columns ({int, String}) automatically map to the method arguments 
+	 * (int userID, String title).
+	 * * 2. Path Parameter ({userId}):
+	 * - The syntax `pathParam("userId", userID)` instructs RestAssured to search 
+	 * the endpoint string for "{userId}" and replace it with the actual integer value.
+	 * * 3. Validation (hasItem):
+	 * - `body("title", hasItem(title))` expects the response "title" field to be 
+	 * a List/Array. It passes only if the expected 'title' exists somewhere in that list.
+	 */
 	@Test(dataProvider = "getUserData")
 	public void getUserPostWithPathParamTest(int userID, String title) {
 		RestAssured.baseURI ="https://gorest.co.in";
@@ -40,6 +54,17 @@ public class GetUserPostWithPathParam {
 				.body("title", hasItem(title));
 	}
 	
+	/*
+	 * TECHNICAL NOTE: Dynamic URL Construction via Map
+	 * ------------------------------------------------
+	 * This method demonstrates how to build flexible endpoints using a HashMap.
+	 * * 1. Template URL:
+	 * - The .get("/{firstpath}/{secondpath}") acts as a template.
+	 * * 2. Map-Based Injection:
+	 * - `pathParams(pathParamMap)` looks at the Map keys ("firstpath", "secondpath")
+	 * - It automatically injects the corresponding Map values ("api", "users") into 
+	 * the template placeholders.
+	 */
 	@Test()
 	public void getUserWithPathParamUsingHashMapTest() {
 		
