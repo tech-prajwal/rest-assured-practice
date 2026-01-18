@@ -141,7 +141,5 @@ public class PostAPIWithDifferentBody {
 		.then().log().all()
 			.assertThat()
 				.statusCode(200);
-			
-		
 	}
 }
