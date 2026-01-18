@@ -125,7 +125,8 @@ public class CreateUserWithLombokTest {
 				Assert.assertEquals(js.getString("name"), user.getName());
 				Assert.assertEquals(js.getString("gender"), user.getGender());
 				Assert.assertEquals(js.getString("status"), user.getStatus());
-				
+				Assert.assertNotNull(js.getString("id"));
+		
 	}
 	
 	//Practice
