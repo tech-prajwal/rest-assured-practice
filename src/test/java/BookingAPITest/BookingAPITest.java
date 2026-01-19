@@ -8,7 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import BookingAPITest.Credentials.CredentialsBuilder;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
@@ -17,14 +16,13 @@ public class BookingAPITest {
 	String tokenID;
 	int newBookingId;
 	
-	
 	@BeforeTest
 	public void getToken() {
 		RestAssured.baseURI = "https://restful-booker.herokuapp.com";
 		
 		Credentials creds = new Credentials.CredentialsBuilder()
-				.username("prajwal")
-				.password("Password@123")
+				.username("admin")
+				.password("password123")
 				.build();
 		 tokenID = given().log().all()
 			.contentType(ContentType.JSON)
@@ -42,8 +40,6 @@ public class BookingAPITest {
 		newBookingId = createBooking();
 	}
 	
-	
-	
 	@Test
 	public void getBookingTest() {		
 		given().log().all()
@@ -59,7 +55,6 @@ public class BookingAPITest {
 					.body("bookingdates.checkin", equalTo("2018-01-01"));
 
 	}
-	
 	
 	@Test
 	public void createBookingTest() {
