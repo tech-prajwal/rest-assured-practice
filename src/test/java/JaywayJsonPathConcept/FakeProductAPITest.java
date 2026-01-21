@@ -127,6 +127,36 @@ RestAssured.baseURI = "https://fakestoreapi.com";
 		//functions
 		
 		
+		//using contains
+		List<Integer> singleID = ctx.read("$[?(@.title =~ /.*Backpack.*/i)].id");
+		System.out.println(singleID);
+		
+		//using startswith
+		List<Integer> startsWith = ctx.read("$[?(@.title =~ /^Fjallraven.*/i)].id");
+		System.out.println(startsWith);
+				
+		//using endswith
+		List<Integer> endsWith = ctx.read("$[?(@.title =~ /.*Laptops$/i)].id");
+		System.out.println(endsWith);
+		
+		System.out.println("++++++++++++++++=========++++++++++++");
+		Double minPrice = ctx.read("min($[*].price)");
+		System.out.println(minPrice);
+		
+		Double maxPrice = ctx.read("max($[*].price)");
+		System.out.println(maxPrice);
+		
+		Double avgPrice = ctx.read("avg($[*].price)");
+		System.out.println(avgPrice);
+		
+		Integer length = ctx.read("length($)");
+		System.out.println(length);
+		
+		String concatinateTitle = ctx.read("concat($[*].title)");
+		System.out.println(concatinateTitle);
+		
+		
+		
 	}
 	
 	
