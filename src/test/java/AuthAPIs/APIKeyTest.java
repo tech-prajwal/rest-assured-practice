@@ -31,6 +31,8 @@ public class APIKeyTest {
 					.then().log().all()
 					.assertThat()
 					.statusCode(200);
+		
+		
 					
 	}
 	
